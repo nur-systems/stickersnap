@@ -10,7 +10,7 @@
           <div class="container">
             <b-tabs :animated="false" v-model="activeTab">
               <b-tab-item label="Upload">
-                <ImageUpload @upload="processFiles"></ImageUpload>
+                <ImageUpload v-bind:files="files" @upload="processFiles"></ImageUpload>
               </b-tab-item>
 
               <b-tab-item label="Stickers">

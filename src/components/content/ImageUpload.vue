@@ -17,11 +17,12 @@
 
 <script>
   export default {
-    data: function () {
-      return {
-        files: []
+    props: {
+      files: {
+        type: Array,
+        default: () => []
       }
-    }, 
+    },
     methods: {
       emitFiles: function () {
         const uniqueFiles = this.files.filter((v, i, a) => a.indexOf(v) === i); 
