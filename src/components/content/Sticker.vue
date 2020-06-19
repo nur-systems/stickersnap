@@ -61,7 +61,8 @@ import axios from 'axios'
         let URL = this.modelSvcUrl;
         let data = new FormData();
         let config = {
-          responseType: 'arraybuffer'
+          responseType: 'arraybuffer',
+          crossDomain: true
         }
         data.append('data', file); 
         axios.post(URL, data, config).then(

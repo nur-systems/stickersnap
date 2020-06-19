@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     checkStatus: function () {
-      axios.get(this.modelSvcUrl).then(
+      axios.get(this.modelSvcUrl, {crossDomain: true}).then(
         response => {
           this.statusResponse = response.status;
           this.serviceLive = (this.statusResponse == 200);
