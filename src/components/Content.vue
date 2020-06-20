@@ -16,13 +16,13 @@
               <b-tab-item label="Stickers">
                 <div class="columns">
                   <div class="column is-12">
-                    <b-button type="is-large is-danger" :disabled="files.length == 0" icon-left="robot" expanded @click="files = [];">
+                    <b-button type="is-large is-danger" :disabled="files.length == 0" icon-left="robot" expanded @click="clearFiles()">
                       {{ files.length > 0 ? 'I want to start over!' : 'Waiting for images!' }}
                     </b-button>
                   </div>
                 </div>
                 <div class="columns is-multiline">
-                  <div v-for="(file, index) in files" :key="index" class="column is-4">
+                  <div v-for="(file, index) in files.slice().reverse()" :key="file.name + '-' + file.size" class="column is-4">
                     <Sticker v-bind:file="file" 
                              v-bind:modelSvcUrl="modelSvcUrl"
                              @delete="deleteFile(index)"></Sticker>
@@ -62,12 +62,17 @@ import DevTools from './content/DevTools.vue'
     },
     methods: {
       deleteFile: function (index) {
-        this.files.splice(index, 1);
+        const inverseIndex = this.files.length - index - 1;
+        this.files.splice(inverseIndex, 1);
         this.files = this.files.map(x => x);
       },
       processFiles: function (files) {
         this.files = files;
         this.activeTab = 1;
+      },
+      clearFiles: function () {
+        this.files = []; 
+        this.activeTab = 0;
       }
     }
   }
